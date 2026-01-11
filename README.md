@@ -1,75 +1,74 @@
-🛒 Desarrollo y Despliegue de E-commerce: Especias Michelle
+# Especias Michelle - E-commerce & Logística Compleja
 
-Caso de Estudio: Migración de entorno local a producción, integración de pasarelas de pago y hardening de seguridad.
+Este proyecto consiste en el desarrollo, configuración y despliegue de una tienda online completa para un negocio local de especias y quesos artesanales. 
 
-Este repositorio documenta el proceso técnico y los desafíos superados durante el desarrollo y puesta en marcha de una tienda online real para el sector de alimentación. El objetivo fue crear una plataforma robusta, segura y automatizada sobre WordPress/WooCommerce.
+El desafío principal no fue solo el diseño, sino la implementación de una **lógica de envíos híbrida** (productos secos vs. refrigerados) para optimizar costes logísticos y mejorar la experiencia de usuario.
 
-🔗 Ver proyecto en vivo: www.especiasmichelle.com
+🔗 **Demo en vivo:** [https://especiasmichelle.com](https://especiasmichelle.com)
 
-🚀 Desafíos Técnicos y Soluciones
+## 🛠 Tech Stack
 
-Este proyecto fue más allá de la instalación de un CMS; implicó gestión de servidores, seguridad y lógica de negocio personalizada.
+* **CMS:** WordPress 6.x
+* **E-commerce:** WooCommerce
+* **Diseño UI/UX:** Elementor (Diseño Responsive)
+* **SEO:** Rank Math
+* **Servidor:** Hostinger (LiteSpeed Cache)
+* **Control de Versiones:** Git / GitHub
 
-1. Infraestructura y Despliegue
+## 🚀 Funcionalidades Clave & Desafíos Resueltos
 
-Migración Crítica: Realicé el despliegue desde un entorno de desarrollo local a un servidor VPS/Hosting (Hostinger).
+### 1. Lógica de Envíos Condicional (Shipping Logic)
+El mayor reto técnico fue gestionar dos tipos de productos con necesidades de transporte opuestas:
+* **Problema:** Al mezclar productos secos (envío económico) con quesos (envío frío/caro), WooCommerce sumaba ambos costes, duplicando el precio para el cliente.
+* **Solución:** Implementación de **Clases de Envío** y reglas de prioridad.
+    * Si el carrito tiene solo secos → Tarifa A (5,90€).
+    * Si el carrito tiene solo frío → Tarifa B (7,90€).
+    * **Si el carrito es mixto** → El sistema detecta la clase superior ("Frío"), cobra solo esa tarifa y anula la del seco.
+    * **Envío Gratuito:** Regla de anulación automática al superar los 60€.
 
-Gestión de DNS: Configuración de registros A y CNAME, además de registros SPF y DKIM para garantizar la entregabilidad de los correos transaccionales (evitando la carpeta de SPAM).
+### 2. Gestión de Productos Variables
+Configuración avanzada de inventario para productos que se venden por peso:
+* Creación de atributos globales y variaciones (250g, 500g, 1kg).
+* Gestión de stock independiente por variación (SKU diferenciados).
 
-Base de Datos: Actualización masiva de URLs serializadas en la base de datos para corregir enlaces rotos post-migración.
+### 3. Optimización y SEO
+* Estrategia de palabras clave implementada con Rank Math.
+* Configuración de Open Graph para compartir en redes sociales (WhatsApp/LinkedIn).
+* Optimización de imágenes para tiempos de carga rápidos.
 
-2. Integración de Pagos (Stripe)
+## 📸 Galería del Proyecto
 
-Implementación de la pasarela de pagos Stripe mediante API.
+### Portada y Diseño Visual
+Diseño limpio orientado a la conversión y a resaltar la calidad del producto artesanal.
+![Portada de la web](portada.jpg)
 
-Configuración manual de Webhooks para asegurar la sincronización de estados de pago (evitando pedidos "pendientes de pago" cuando el cargo fue exitoso).
+### Catálogo y Categorización
+Estructura clara separando especias y productos refrigerados.
+![Vista de la tienda](tienda.jpg)
 
-Lógica de envíos condicionales basada en zonas geográficas y subtotal del carrito.
+### Ficha de Producto Variable
+Detalle de la configuración de selectores de peso y stock en tiempo real.
+![Detalle de producto](producto.jpg)
 
-3. Seguridad (Hardening)
+### Lógica del Carrito
+Ejemplo del cálculo de envío funcionando correctamente con productos mixtos.
+![Carrito de compra](carrito.jpg)
 
-SSL/HTTPS: Forzado de redirecciones seguras a nivel de servidor.
+### Integración Social
+Sección de contacto y feed de Instagram para prueba social.
+![Sección de Instagram](instagram.jpg)
+![Formulario de contacto](contacto.jpg)
 
-Protección contra Fuerza Bruta: Implementación de límites de intentos de login y ofuscación de rutas de administración.
+---
 
-RBAC: Configuración estricta de roles y permisos de usuario.
+## 👨‍💻 Instalación y Despliegue
 
-4. Troubleshooting (Resolución de Problemas)
+El proyecto fue desarrollado inicialmente en entorno local y migrado a producción utilizando **All-in-One WP Migration**.
 
-Conflicto de Caché: Diagnóstico y solución de problemas con LiteSpeed Cache que impedían la actualización del carrito en tiempo real.
+1.  Configuración de entorno LAMP/XAMPP local.
+2.  Desarrollo y pruebas de estrés de la lógica de envíos.
+3.  Despliegue en servidor compartido y configuración de DNS.
+4.  Configuración de seguridad (SSL) y correos transaccionales.
 
-Integración de API Social: Resolución de errores de conexión con la API Graph de Instagram tras el cambio de dominio, implementando una solución de tokens de acceso persistentes.
-
-🛠 Stack Tecnológico
-
-CMS: WordPress + WooCommerce
-
-Frontend: Elementor Pro, CSS3 personalizado
-
-Pagos: Stripe API
-
-Servidor: LiteSpeed / Hostinger
-
-Herramientas: FileZilla (FTP), phpMyAdmin
-
-📸 Capturas del Proyecto
-
-A continuación se muestran algunas vistas clave de la implementación:
-
-Home & Branding
-
-Página de Producto
-
-
-
-
-
-Carrito & Checkout
-
-Pasarela Stripe
-
-
-
-
-
-Desarrollado y desplegado por Daniel Meléndez.
+---
+*Proyecto desarrollado por [Daniel Loreto](https://github.com/DanielML84)*
