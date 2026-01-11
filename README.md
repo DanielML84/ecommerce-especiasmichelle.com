@@ -51,7 +51,7 @@ Detalle de la configuración de selectores de peso y stock en tiempo real.
 ![Detalle de producto](producto.jpg)
 
 ### Lógica del Carrito
-Ejemplo del cálculo de envío funcionando correctamente con productos mixtos.
+Ejemplo del cálculo de envío funcionando correctamente.
 ![Carrito de compra](carrito.jpg)
 
 ### Integración Social
